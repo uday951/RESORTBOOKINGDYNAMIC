@@ -1,4 +1,4 @@
-// File: C:\Users\Udayk\Desktop\New folder (2)\Next_Resort_Project\src\app\api\admin\add-product\route.js
+// File: C:\Users\Udayk\Desktop\resort booking 2\Next_Resort_Project\src\app\api\admin\add-product\route.js
 import * as entry from '../../../../../../src/app/api/admin/add-product/route.js'
 import type { NextRequest } from 'next/server.js'
 

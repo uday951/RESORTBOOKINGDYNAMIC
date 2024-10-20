@@ -11,14 +11,14 @@ const ProductCollection = () => {
   const collectionHandler = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:3000/api/admin/add-product`)
+      const response = await fetch(`http://localhost:3000/api/admin/add-product`);
       const newData = await response.json();
 
       console.log("productData:", newData);
 
       setCollections(newData.data);
     } catch (error) {
-      setError(response.message);
+      setError(error.message); // Updated to use error.message
     } finally {
       setLoading(false);
     }
@@ -31,6 +31,30 @@ const ProductCollection = () => {
   return (
     <div className="productSection">
       <h1 align="center">Select your Stay</h1>
+      {loading && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <p>Loading...</p>
+        </div>
+      )}
+      {error && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "50vh",
+          }}
+        >
+          <p>{error}</p>
+        </div>
+      )}
       {collections ? (
         collections.map((item) => {
           return (
@@ -64,15 +88,18 @@ const ProductCollection = () => {
           );
         })
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "50vh",
-          }}
-        >
-        </div>
+        !loading && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50vh",
+            }}
+          >
+            <p>No collections found</p>
+          </div>
+        )
       )}
     </div>
   );
